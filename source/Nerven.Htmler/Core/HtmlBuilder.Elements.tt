@@ -1,0 +1,102 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+<#
+var _emptyElements = "Area,Base,Br,Col,Embed,Hr,Img,Input,Link,Meta,Param,Source,Track,Wbr"
+	.Split(',')
+	.Select(_memberName => new { ElementName = _memberName.ToLower(), FriendlyMemberName = _memberName.ToLower() + "Tag", FormalMemberName = _memberName, Empty = true });
+var _containerElements = ("A,Abbr,Address,Article,Aside,Audio,B,Bdi,Bdo,Blockquote,Body,Button,Canvas,Caption,Cite,Code,Colgroup,Data,Datalist,Dd,Del,Dfn,Div,Dl,Dt,"
+		+ "Em,Fieldset,Figure,Footer,Form,H1,H2,H3,H4,H5,H6,Head,Header,Html,I,Iframe,Ins,Kbd,Label,Legend,Li,Main,Map,Mark,Meter,Nav,NoScript"
+		+ ",Object,Ol,OptGroup,Option,Output,P,Pre,Progress,Q,Rb,Rp,Rt,Rtc,Ruby,S,Samp,Script,Section,Select,Small,Span,Strong,Style,Sub,Sup,"
+		+ "Table,TBody,Td,Template,Textarea,TFoot,Th,THead,Time,Title,Tr,U,Ul,Var,Video")
+	.Split(',')
+	.Select(_memberName => new { ElementName = _memberName.ToLower(), FriendlyMemberName = _memberName.ToLower() + "Tag", FormalMemberName = _memberName, Empty = false });
+
+var _elements = _emptyElements.Concat(_containerElements)
+	.OrderBy(_element => _element.FormalMemberName)
+	.ToArray();
+#>
+using System;
+using System.Collections.Generic;
+using Nerven.Assertion;
+using Nerven.Htmler.Build;
+
+namespace Nerven.Htmler.Core
+{
+    //// ReSharper disable InconsistentNaming
+    public partial class HtmlBuilder
+    {
+<#
+	foreach (var _element in _elements)
+	{
+		if (_element.Empty)
+		{
+#>
+        private static readonly HtmlElementProperties _<#=_element.FormalMemberName#>Element = _EmptyElementProperties("<#=_element.ElementName#>");
+<#
+		}
+		else
+		{
+#>
+        private static readonly HtmlElementProperties _<#=_element.FormalMemberName#>Element = _ContainerElementProperties("<#=_element.ElementName#>");
+<#
+		}
+	}
+#>
+
+        private static readonly IDictionary<string, HtmlElementProperties> _ElementFactories = new Dictionary<string, HtmlElementProperties>(StringComparer.OrdinalIgnoreCase)
+            {
+<#
+	foreach (var _element in _elements)
+	{
+#>
+				{ "<#=_element.ElementName#>", _<#=_element.FormalMemberName#>Element },
+<#
+	}
+#>
+            };
+			
+        public static IHtmlElement Element(string elementName)
+        {
+            HtmlElementProperties _elementProperties;
+            if (_ElementFactories.TryGetValue(elementName, out _elementProperties))
+            {
+                return _elementProperties.CreateElement();
+            }
+
+            throw Must.Assertion.AssertNever<NotSupportedException>();
+        }
+
+        public static IHtmlElement Element(string elementName, bool preferEmpty)
+        {
+            HtmlElementProperties _elementProperties;
+            if (!_ElementFactories.TryGetValue(elementName, out _elementProperties))
+            {
+                _elementProperties = new HtmlElementProperties(elementName, preferEmpty);
+            }
+
+            return _elementProperties.CreateElement();
+        }
+
+<#
+	foreach (var _element in _elements)
+	{
+		if (_element.Empty)
+		{
+#>
+        public static IHtmlElement <#=_element.FriendlyMemberName#>(params IHtmlAttribute[] attributes) => _<#=_element.FormalMemberName#>Element.CreateElement(attributes);
+<#
+		}
+		else
+		{
+#>
+        public static IHtmlContainerElement <#=_element.FriendlyMemberName#>(params IHtmlNode[] nodes) => _<#=_element.FormalMemberName#>Element.CreateContainerElement(nodes);
+<#
+		}
+	}
+#>
+	}
+}
