@@ -98,7 +98,9 @@ namespace Nerven.Htmler.Tests
 <p>Well, to avoid issues with whitespace affecting layout, default mode generates no whitespace or newlines at all, but one can turn on some newlines if needed.</p>
 </body>
 </html>
-" + Environment.NewLine,
+
+".Replace(@"
+", Environment.NewLine),
                 s);
             //// ReSharper restore InconsistentNaming
         }
