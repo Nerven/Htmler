@@ -1,131 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BB4A6ACE-FB28-49E3-A947-96FD9AD58C73}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nerven.Htmler</RootNamespace>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>Nerven.Htmler</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <PackageId>Nerven.Htmler</PackageId>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="Nerven.Htmler.nuspec" />
-    <None Include="project.json" />
+    <PackageReference Include="Nerven.Assertion" Version="0.6.2" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Build\HtmlRawProperties.cs" />
-    <Compile Include="Build\_HtmlDeferredData.{TFinal,TIntermediate}.cs" />
-    <Compile Include="Build\_HtmlDeferredData.{TFinal}.cs" />
-    <Compile Include="Build\_HtmlResourceNodeBase.{TResourceNode,TResourceProperties}.cs" />
-    <Compile Include="Build\_HtmlOwnedNodeBase.{TNode,TOwned,TOwner}.cs" />
-    <Compile Include="Build\HtmlCommentProperties.cs" />
-    <Compile Include="Build\HtmlDocumentProperties.cs" />
-    <Compile Include="Build\HtmlDocumentResourceProperties.cs" />
-    <Compile Include="Build\HtmlSiteProperties.cs" />
-    <Compile Include="Build\HtmlTextProperties.cs" />
-    <Compile Include="Build\_HtmlResourceNodeCollection.cs" />
-    <Compile Include="Build\_HtmlComment.cs" />
-    <Compile Include="Build\_HtmlDocumentResource.cs" />
-    <Compile Include="Build\_HtmlSite.cs" />
-    <Compile Include="Build\_HtmlDocument.cs" />
-    <Compile Include="Build\_HtmlRaw.cs" />
-    <Compile Include="Build\_HtmlText.cs" />
-    <Compile Include="Build\_HtmlAttribute.cs" />
-    <Compile Include="Build\_HtmlAttributeCollection.cs" />
-    <Compile Include="Build\_HtmlAnnotationCollection.cs" />
-    <Compile Include="Build\_HtmlChildNodeCollection.cs" />
-    <Compile Include="Build\HtmlAttributeProperties.cs" />
-    <Compile Include="Build\_HtmlContainerElement.cs" />
-    <Compile Include="Build\_HtmlNodeBase.{TNode}.cs" />
-    <Compile Include="Build\_HtmlElement.cs" />
-    <Compile Include="Build\_HtmlNodeCollectionBase.{TNode,TOwner}.cs" />
-    <Compile Include="Build\HtmlElementProperties.cs" />
-    <Compile Include="Core\HtmlBuilder.Attributes.cs" />
-    <Compile Include="Core\HtmlBuilder.Elements.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HtmlBuilder.Elements.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Core\HtmlBuilder.cs" />
-    <Compile Include="Core\HtmlDeferredDataExtensions.{string}.cs" />
-    <Compile Include="Core\HtmlResourceNodeExtensions.cs" />
-    <Compile Include="Core\HtmlSiteExtensions.cs" />
-    <Compile Include="Core\HtmlParentNodeExtensions.cs" />
-    <Compile Include="Core\XAttributeExtensions.cs" />
-    <Compile Include="Core\XNodeExtensions.cs" />
-    <Compile Include="Core\XObjectExtensions.cs" />
-    <Compile Include="Core\HtmlTextWriter.cs" />
-    <Compile Include="Fundamentals\IHtmlDeferredData.{TFinal,TIntermediate}.cs" />
-    <Compile Include="Fundamentals\IHtmlDeferredData.{TFinal}.cs" />
-    <Compile Include="IHtmlAnnotationCollection.cs" />
-    <Compile Include="IHtmlAnnotation.cs" />
-    <Compile Include="IHtmlAttributeCollection.cs" />
-    <Compile Include="IHtmlAttribute.cs" />
-    <Compile Include="Fundamentals\IHtmlOwnedNode.{TNode}.cs" />
-    <Compile Include="Fundamentals\IHtmlNodeCollection.{TNode}.cs" />
-    <Compile Include="Fundamentals\IHtmlAnnotableNode.cs" />
-    <Compile Include="IHtmlContainerElement.cs" />
-    <Compile Include="IHtmlDocument.cs" />
-    <Compile Include="IHtmlRaw.cs" />
-    <Compile Include="IHtmlText.cs" />
-    <Compile Include="IHtmlComment.cs" />
-    <Compile Include="Fundamentals\IHtmlValueNode.cs" />
-    <Compile Include="Fundamentals\IHtmlParentNode.cs" />
-    <Compile Include="Fundamentals\IHtmlChildNodeCollection.cs" />
-    <Compile Include="IHtmlElement.cs" />
-    <Compile Include="Fundamentals\IHtmlNamedNode.cs" />
-    <Compile Include="Fundamentals\IHtmlChildNode.cs" />
-    <Compile Include="IHtmlNode.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IHtmlStreamResource.cs" />
-    <Compile Include="IHtmlTextResource.cs" />
-    <Compile Include="IHtmlDocumentResource.cs" />
-    <Compile Include="Fundamentals\IHtmlResourceNodeCollection.cs" />
-    <Compile Include="Fundamentals\IHtmlResourceNode.cs" />
-    <Compile Include="IHtmlSite.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Core\HtmlBuilder.Elements.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>HtmlBuilder.Elements.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
