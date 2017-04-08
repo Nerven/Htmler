@@ -20,6 +20,8 @@ namespace Nerven.Htmler.Build
             _Annotations = new _HtmlAnnotationCollection(ChildrensProof, this, cloneFrom?._Annotations);
 
             _HtmlDeferredData<string>.Create(_ref => Data = _ref);
+
+            Data.Final = cloneFrom?.Data.Final;
         }
 
         public string Name => _AttributeProperties.AttributeName;
