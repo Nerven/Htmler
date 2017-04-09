@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Nerven.Htmler.Fundamentals
 {
@@ -7,5 +10,7 @@ namespace Nerven.Htmler.Fundamentals
         new IReadOnlyList<string> Name { get; set; }
 
         IHtmlResourceNode CloneResourceNode();
+
+        Task WriteToStreamAsync(Stream target, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
