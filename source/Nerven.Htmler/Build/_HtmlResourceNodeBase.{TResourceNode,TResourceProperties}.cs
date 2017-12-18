@@ -1,8 +1,5 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using Nerven.Assertion;
 using Nerven.Assertion.Extensions;
@@ -38,8 +35,6 @@ namespace Nerven.Htmler.Build
         public override IHtmlAnnotationCollection Annotations => _Annotations;
 
         protected TResourceProperties ResourceProperties { get; }
-
-        public abstract Task WriteToStreamAsync(Stream target, CancellationToken cancellationToken = new CancellationToken());
 
         public IHtmlResourceNode CloneResourceNode() => Clone();
 
