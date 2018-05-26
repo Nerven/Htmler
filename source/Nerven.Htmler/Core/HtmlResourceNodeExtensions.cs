@@ -28,7 +28,11 @@ namespace Nerven.Htmler.Core
             var _streamResource = resourceNode as IHtmlStreamResource;
             if (_streamResource != null)
             {
-                await _streamResource.GetStream().CopyToAsync(stream).ConfigureAwait(false);
+                using (var _resourceStream = await _streamResource.GetStreamAsync().ConfigureAwait(false))
+                {
+                    await _resourceStream.CopyToAsync(stream).ConfigureAwait(false);
+                }
+                
                 return;
             }
 
