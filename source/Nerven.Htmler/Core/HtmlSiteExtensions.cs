@@ -50,7 +50,7 @@ namespace Nerven.Htmler.Core
             var _index = 0;
             foreach (var _c in pathPart)
             {
-                if (char.IsLetterOrDigit(_c) || _c == '-' || _c == '_' || _c == ' ')
+                if (char.IsLetterOrDigit(_c) || _c == '-' || _c == '_' || _c == ' ' || _c == '.')
                 {
                     _buffer[_index++] = _c;
                 }
